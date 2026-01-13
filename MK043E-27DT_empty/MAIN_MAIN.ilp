@@ -1,0 +1,52 @@
+(*2*)
+(* Network 0 *)
+(*Conversion ADC a Temperatura Zona 1*)
+LD    TRUE
+MOVE    AI_Temp_Sensor1, Temp_Calc_Z1
+SUB    DI#819, Temp_Calc_Z1
+MUL    DI#100, Temp_Calc_Z1
+DIV    DI#3276, Temp_Calc_Z1
+DI_TO_R    Temp_Calc_Z1, HMI_Temp_Zone1
+(* Network 1 *)
+(*Conversion ADC a Temperatura Zona 2*)
+LD    TRUE
+MOVE    AI_Temp_Sensor2, Temp_Calc_Z2
+SUB    DI#819, Temp_Calc_Z2
+MUL    DI#100, Temp_Calc_Z2
+DIV    DI#3276, Temp_Calc_Z2
+DI_TO_R    Temp_Calc_Z2, HMI_Temp_Zone2
+(* Network 2 *)
+(*Limitar temperatura minima zona 1*)
+LD    TRUE
+LT    HMI_Temp_Zone1, 0.0
+MOVE    0.0, HMI_Temp_Zone1
+(* Network 3 *)
+(*Limitar temperatura maxima zona 1*)
+LD    TRUE
+GT    HMI_Temp_Zone1, 100.0
+MOVE    100.0, HMI_Temp_Zone1
+(* Network 4 *)
+(*Limitar temperatura minima zona 2*)
+LD    TRUE
+LT    HMI_Temp_Zone2, 0.0
+MOVE    0.0, HMI_Temp_Zone2
+(* Network 5 *)
+(*Limitar temperatura maxima zona 2*)
+LD    TRUE
+GT    HMI_Temp_Zone2, 100.0
+MOVE    100.0, HMI_Temp_Zone2
+(* Network 6 *)
+(*RUNG 7: Calcular Temperatura Máxima*)
+LD    TRUE
+GE    HMI_Temp_Zone1, HMI_Temp_Zone2
+MOVE    HMI_Temp_Zone1, HMI_Temp_Max
+(* Network 7 *)
+LD    TRUE
+LT    HMI_Temp_Zone1, HMI_Temp_Zone2
+MOVE    HMI_Temp_Zone2, HMI_Temp_Max
+(* Network 8 *)
+(*Calcular temperatura promedio*)
+LD    TRUE
+MOVE    HMI_Temp_Zone1, HMI_Temp_Avg
+ADD    HMI_Temp_Zone2, HMI_Temp_Avg
+DIV    2.0, HMI_Temp_Avg
