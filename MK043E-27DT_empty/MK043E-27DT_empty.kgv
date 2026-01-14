@@ -1,10 +1,6 @@
 VAR_GLOBAL
-    DI_Reset_Button AT  %I0.0    :BOOL  ;  (*Botón Reset*)
-    DI_Manual_Override AT  %I0.1    :BOOL  ;  (*Anulación Manual*)
-    DI_System_Enable AT  %I0.2    :BOOL  ;  (*Habilitación Sistema*)
     DI_Door_Zone1 AT  %I0.3    :BOOL  ;  (*Puerta Zona 1*)
     DI_Door_Zone2 AT  %I0.4    :BOOL  ;  (*Puerta Zona 2*)
-    DI_Emergency_Stop AT  %I0.5    :BOOL  ;  (*Parada Emergencia*)
     AI_Temp_Sensor1 AT  %MD0     :DINT  ;  (*Sensor Temperatura Zona 1*)
     AI_Temp_Sensor2 AT  %MD4     :DINT  ;  (*Sensor Temperatura Zona 2*)
     DO_Alarm_Horn AT  %Q0.0    :BOOL  ;  (*Sirena*)
@@ -14,6 +10,11 @@ VAR_GLOBAL
     DO_Emergency_Vent AT  %Q0.4    :BOOL  ;  (*Ventilación*)
     DO_Emergency_Light AT  %Q0.5    :BOOL  ;  (*Luces Emergencia*)
     DO_Beacon_Red AT  %Q0.6    :BOOL  ;  (*Baliza Roja*)
+    DI_Reset_Button AT  %I0.0    :BOOL  ;  (*Botón Reset*)
+    DI_Manual_Override AT  %I0.1    :BOOL  ;  (*Anulación Manual*)
+    DI_System_Enable AT  %I0.2    :BOOL  ;  (*Habilitación Sistema*)
+    DI_Emergency_Stop AT  %I0.5    :BOOL  ;  (*Parada Emergencia*)
 END_VAR
 VAR_GLOBAL
+    T0     :TP    ;  (*  *)
 END_VAR

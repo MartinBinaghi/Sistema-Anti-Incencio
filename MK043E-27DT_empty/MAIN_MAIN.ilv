@@ -28,11 +28,12 @@ VAR
     Alarm_Latched  AT  %L3.2 : BOOL ; (*  *) 
     Test_Mode  AT  %L3.3 : BOOL ; (*  *) 
     Silence_Active  AT  %L3.4 : BOOL ; (*  *) 
-    Reset_Trigger  AT  %L3.5 : BOOL ; (*  *) 
+    Reset_Trigger  AT  %L1.0 : BOOL ; (*  *) 
     Silence_Trigger  AT  %L3.6 : BOOL ; (*  *) 
     Test_Trigger  AT  %L3.7 : BOOL ; (*  *) 
     Temp_Raw1  AT  %LW62 : INT ; (*  *) 
     Temp_Raw2  AT  %LW60 : INT ; (*  *) 
     Temp_Calc_Z1  AT  %LD56 : DINT ; (*  *) 
     Temp_Calc_Z2  AT  %LD52 : DINT ; (*  *) 
+    Reset_Trigger_HMI  AT  %L1.1 : BOOL ; (*  *) 
 END_VAR
