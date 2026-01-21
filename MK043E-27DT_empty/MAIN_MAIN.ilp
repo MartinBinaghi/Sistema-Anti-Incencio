@@ -63,3 +63,28 @@ OR    HMI_BTN_Reset
 R_TRIG
 TP   T0, 2000
 ST   Reset_Trigger
+(* Network 11 *)
+(*Silenciar*)
+LD    HMI_BTN_Silence_Alarm
+R_TRIG
+ST   Silence_Trigger
+(* Network 12 *)
+(*Test*)
+LD    HMI_BTN_Test_System
+R_TRIG
+ST   Test_Trigger
+(* Network 13 *)
+(*Activar Modo Test*)
+LD    Test_Trigger
+ADD    1, HMI_Event_Counter
+S    Test_Mode
+(* Network 14 *)
+LD    Test_Mode
+TON   T2, 10000
+__CR_EQ_1
+MOVE    T2, %VW14
+__CR_RESTORE
+ST   %BR0.0
+(* Network 15 *)
+LD    T2
+R    Test_Mode

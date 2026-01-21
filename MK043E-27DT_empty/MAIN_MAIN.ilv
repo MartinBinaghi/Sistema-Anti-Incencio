@@ -17,7 +17,7 @@ VAR
     HMI_BTN_Reset  AT  %L0.0 : BOOL ; (*  *) 
     HMI_BTN_Silence_Alarm  AT  %L0.5 : BOOL ; (*  *) 
     HMI_BTN_Test_System  AT  %L0.1 : BOOL ; (*  *) 
-    HMI_BTN_Manual_Zone1  AT  %L2.2 : BOOL ; (*  *) 
+    HMI_BTN_Manual_Zone1  AT  %L1.2 : BOOL ; (*  *) 
     HMI_BTN_Manual_Zone2  AT  %L2.3 : BOOL ; (*  *) 
     System_Active  AT  %L2.4 : BOOL ; (*  *) 
     Fire_Detected_Zone1  AT  %L0.7 : BOOL ; (*  *) 
@@ -36,4 +36,5 @@ VAR
     Temp_Calc_Z1  AT  %LD56 : DINT ; (*  *) 
     Temp_Calc_Z2  AT  %LD52 : DINT ; (*  *) 
     Reset_Trigger_HMI  AT  %L1.1 : BOOL ; (*  *) 
+    TON_Test_Timer_Done  AT  %LW64 : INT ; (*  *) 
 END_VAR
