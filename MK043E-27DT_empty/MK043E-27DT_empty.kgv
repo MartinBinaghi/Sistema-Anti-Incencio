@@ -18,4 +18,5 @@ END_VAR
 VAR_GLOBAL
     T0     :TP    ;  (*  *)
     T2     :TON   ;  (*  *)
+    T3     :TON   ;  (*  *)
 END_VAR

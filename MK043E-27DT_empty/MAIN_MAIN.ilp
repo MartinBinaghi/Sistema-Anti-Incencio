@@ -80,7 +80,7 @@ ADD    1, HMI_Event_Counter
 S    Test_Mode
 (* Network 14 *)
 LD    Test_Mode
-TON   T2, 10000
+TON   T2, 1000
 __CR_EQ_1
 MOVE    T2, %VW14
 __CR_RESTORE
@@ -88,3 +88,69 @@ ST   %BR0.0
 (* Network 15 *)
 LD    T2
 R    Test_Mode
+(* Network 16 *)
+(*Deteccion de Incendio Zona 1*)
+LD    System_Active
+GE    HMI_Temp_Zone1, HMI_Threshold_Critical
+ST   Fire_Detected_Zone1
+ST   HMI_Fire_Zone1
+(* Network 17 *)
+(*Deteccion de Incendio Zona 2*)
+LD    System_Active
+GE    HMI_Temp_Zone2, HMI_Threshold_Critical
+ST   Fire_Detected_Zone2
+ST   HMI_Fire_Zone2
+(* Network 18 *)
+(*Cualquier fuego detectado*)
+LD    Fire_Detected_Zone1
+OR    Fire_Detected_Zone2
+ST   Any_Fire_Detected
+(* Network 19 *)
+(*Alarma de advertencia Zona 1*)
+LD    System_Active
+GE    HMI_Temp_Zone1, HMI_Threshold_Critical
+ST   Alarm_Warning
+(* Network 20 *)
+(*Alarma de advertencia Zona 2*)
+LD    System_Active
+GE    HMI_Temp_Zone2, HMI_Threshold_Critical
+ST   Alarm_Warning
+(* Network 21 *)
+(*Alarma Critica*)
+LD    Any_Fire_Detected
+OR    Test_Mode
+ST   Alarm_Critical
+(* Network 22 *)
+(*Memoria de Alarma (Latched)*)
+LD    Alarm_Critical
+ADD    1, HMI_Event_Counter
+S    Alarm_Latched
+(* Network 23 *)
+(*Reset de alarma*)
+LD    Reset_Trigger
+ANDN    Alarm_Critical
+R    Alarm_Latched
+R    Silence_Active
+(* Network 24 *)
+(*Estado de alarma activo*)
+LD    Alarm_Warning
+OR    Alarm_Critical
+OR    Alarm_Latched
+ST   HMI_Alarm_Active
+(* Network 25 *)
+(*Silenciar alarma*)
+LD    Silence_Trigger
+S    Silence_Active
+(* Network 26 *)
+(*Timer silencio 120 segundos*)
+LD    Silence_Active
+TON   T3, 12000
+__CR_EQ_1
+MOVE    T3, %VW32
+__CR_RESTORE
+ST   %BR0.0
+(* Network 27 *)
+(*Desactivar silencio*)
+LD    T3
+OR    Alarm_Critical
+R    Silence_Active
