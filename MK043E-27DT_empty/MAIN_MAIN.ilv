@@ -37,4 +37,7 @@ VAR
     Temp_Calc_Z2  AT  %LD52 : DINT ; (*  *) 
     Reset_Trigger_HMI  AT  %L1.1 : BOOL ; (*  *) 
     TON_Test_Timer_Done  AT  %LW64 : INT ; (*  *) 
+    Delay_Alarm_Time  AT  %LW66 : INT ; (*  *) 
+    Delay_Sprinkler_Time  AT  %LW68 : INT ; (*  *) 
+    TP_Alarm_Pulse  AT  %LW70 : INT ; (*  *) 
 END_VAR

@@ -154,3 +154,25 @@ ST   %BR0.0
 LD    T3
 OR    Alarm_Critical
 R    Silence_Active
+(* Network 28 *)
+(*Convertir HMI_Delay_Alarm a Time*)
+LD    System_Active
+MOVE    HMI_Delay_Alarm, Delay_Alarm_Time
+MUL    1000, Delay_Alarm_Time
+(* Network 29 *)
+(*Timer retardo alarma*)
+LD    Alarm_Critical
+TON   T4, Delay_Alarm_Time
+(* Network 30 *)
+(*Convertir HMI_Delay_Sprinkler*)
+LD    System_Active
+MOVE    HMI_Delay_Sprinkler, Delay_Sprinkler_Time
+MUL    1000, Delay_Sprinkler_Time
+(* Network 31 *)
+(*Timer Retardo Rociadores*)
+LD    Alarm_Critical
+TON   T5, Delay_Sprinkler_Time
+(* Network 32 *)
+(*Pulso Alarma 500ms*)
+LDN    T6
+TP   T6, 50
