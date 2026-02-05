@@ -176,3 +176,47 @@ TON   T5, Delay_Sprinkler_Time
 (*Pulso Alarma 500ms*)
 LDN    T6
 TP   T6, 50
+(* Network 33 *)
+(*Pulso Baliza 250ms*)
+LDN    T7
+TP   T7, 250
+(* Network 34 *)
+(*Sirena Continua (Alarma Critica)*)
+LD    T4
+OR    Alarm_Latched
+ANDN    Silence_Active
+ST   %Q0.0
+(* Network 35 *)
+(*Sirena Intermitente (Advertencia)*)
+LD    Alarm_Warning
+ANDN    Alarm_Critical
+AND    T6
+ANDN    Silence_Active
+ST   %Q0.0
+(* Network 36 *)
+(*Luz de alarma*)
+LD    HMI_Alarm_Active
+ST   %Q0.1
+(* Network 37 *)
+(*Baliza Roja Parpadeante*)
+LD    Alarm_Critical
+OR    Alarm_Latched
+AND    T7
+ST   %Q0.6
+(* Network 38 *)
+(*Rociador Zona 1*)
+LD    Fire_Detected_Zone1
+OR    HMI_BTN_Manual_Zone1
+AND    T5
+ST   %Q0.2
+(* Network 39 *)
+(*Rociador Zona 2*)
+LD    Fire_Detected_Zone2
+OR    HMI_BTN_Manual_Zone2
+AND    T5
+ST   %Q0.3
+(* Network 40 *)
+(*Estado de rociadores activos*)
+LD    %Q0.2
+OR    %Q0.3
+ST   HMI_Sprinklers_Active
